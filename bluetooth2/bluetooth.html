@@ -1,0 +1,31 @@
+<head>
+  <title>BlueTooth</title>
+</head>
+
+<body>
+  <h1>BlueTooth Test2!</h1>
+  <p>
+    {{status}}
+  </p>
+  <button id="initialize">initialize</button> <br />
+  <button id="startScan">startScan</button> <br />
+  <button id="stopScan">stopScan</button> <br />
+  <button id="list">list</button> <br />
+  <ul>
+    {{#each devices}}
+      <li>
+        [android] <br />
+        class: {{class}} <br />
+        id: {{id}} <br />
+        address: {{address}} <br />
+        name: {{name}} <br />
+        [ios] <br />
+        id: {{id}} <br />
+        uuid: {{uuid}} <br />
+        name: {{name}} <br />
+        rssi: {{rssi}}
+        <hr>
+      </li>
+    {{/each}}
+  </ul>
+</body>
