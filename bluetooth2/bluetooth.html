@@ -4,28 +4,79 @@
 
 <body>
   <h1>BlueTooth Test2!</h1>
-  <p>
-    {{status}}
-  </p>
-  <button id="initialize">initialize</button> <br />
-  <button id="startScan">startScan</button> <br />
-  <button id="stopScan">stopScan</button> <br />
-  <button id="list">list</button> <br />
-  <ul>
+
+  <button class="clear">Clear</button>
+  <button class="initialize">Initialize</button>
+  <button class="enable">Enable</button>
+  <button class="disable">Disable</button>
+  <button class="startScan">Start Scan</button>
+  <button class="stopScan">Stop Scan</button>
+  <button class="retrieveConnected">Retrieve Connected</button>
+  <br />
+  <button class="isInitialized">Is Initialized</button>
+  <button class="isEnabled">Is Enabled</button>
+  <button class="isScanning">Is Scanning</button>
+  <h2>status</h2>
+  {{status}}
+  <h2>Devices</h2>
+  <ul class="devices">
     {{#each devices}}
-      <li>
-        [android] <br />
-        class: {{class}} <br />
-        id: {{id}} <br />
-        address: {{address}} <br />
-        name: {{name}} <br />
-        [ios] <br />
-        id: {{id}} <br />
-        uuid: {{uuid}} <br />
-        name: {{name}} <br />
-        rssi: {{rssi}}
-        <hr>
-      </li>
+      {{> device}}
     {{/each}}
   </ul>
+
 </body>
+
+<template name="device">
+  <li data-address="{{address}}">
+    {{name}} - {{address}}
+  <!--
+    <button class="connect">Connect</button>
+    <button class="reconnect">Reconnect</button>
+    <button class="disconnect">Disconnect</button>
+    <button class="close">Close</button>
+    <button class="discover">Discover</button>
+    <button class="services">Services</button>
+    <button class="rssi">RSSI</button>
+    <button class="mtu">MTU</button>
+    <br />
+    <button class="isConnected">Is Connected</button>
+    <button class="isDiscovered">Is Discovered</button>
+    <button class="requestConnectionPriority">Request Connection Priority</button>
+    <h2 class="toggle">Services</h2>
+    <ul class="services">
+    {{> service}}
+    </ul> -->
+  </li>
+</template>
+<template name="service">
+  <li data-serviceUuid="{0}">
+    <h2>{0}</h2>
+    <button class="characteristics">Characteristics</button>
+    <h2 class="toggle">Characteristics</h2>
+    <ul class="characteristics">
+      {{> characteristic}}
+    </ul>
+  </li>
+</template>
+<template name="characteristic">
+  <li data-characteristicUuid="{0}">
+    <h2>{0}</h2>
+    <button class="read">Read</button>
+    <button class="subscribe">Subscribe</button>
+    <button class="unsubscribe">Unsubscribe</button>
+    <button class="write">Write</button>
+    <button class="descriptors">Descriptors</button>
+    <h2 class="toggle">Descriptors</h2>
+    <ul class="descriptors">
+      {{> descriptor}}
+    </ul>
+  </li>
+</template>
+<template name="descriptor">
+  <li data-descriptorUuid="{0}">
+    <h2>{0}</h2>
+    <button class="readDescriptor">Read Descriptor</button>
+    <button class="writeDescriptor">Write Descriptor</button>
+  </li>
+</template>
