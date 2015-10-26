@@ -9,3 +9,4 @@ Windows Phone 8
 另外，大部分api都是不可用的
 
 # Android
+基本都可以用，扫描到BP5，也可以连接上去！
