@@ -1,5 +1,3 @@
-// http://phonegap-plugins.com/plugins/bcsphere/bluetooth
-
 Devices = new Mongo.Collection(null); // client only
 if (Meteor.isClient) {
   Session.setDefault('status', 'start');
