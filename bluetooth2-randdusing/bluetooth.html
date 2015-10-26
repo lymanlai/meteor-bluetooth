@@ -30,22 +30,24 @@
 <template name="device">
   <li data-address="{{address}}">
     {{name}} - {{address}}
-    <button class="connect">Connect</button>
-    <button class="reconnect">Reconnect</button>
-    <button class="disconnect">Disconnect</button>
-    <button class="close">Close</button>
-    <button class="discover">Discover</button>
-    <button class="services">Services</button>
-    <button class="rssi">RSSI</button>
-    <button class="mtu">MTU</button>
-    <br />
-    <button class="isConnected">Is Connected</button>
-    <button class="isDiscovered">Is Discovered</button>
-    <button class="requestConnectionPriority">Request Connection Priority</button>
-    <h2 class="toggle">Services</h2>
-    <ul class="services">
-    {{> service}}
-    </ul>
+    <div class="content">
+      <button class="connect">Connect</button>
+      <button class="reconnect">Reconnect</button>
+      <button class="disconnect">Disconnect</button>
+      <button class="close">Close</button>
+      <button class="discover">Discover</button>
+      <button class="services">Services</button>
+      <button class="rssi">RSSI</button>
+      <button class="mtu">MTU</button>
+      <br />
+      <button class="isConnected">Is Connected</button>
+      <button class="isDiscovered">Is Discovered</button>
+      <button class="requestConnectionPriority">Request Connection Priority</button>
+      <h2 class="toggle">Services</h2>
+      <ul class="services">
+      <!-- {{> service}} -->
+      </ul>
+    </div>
   </li>
 </template>
 <template name="service">

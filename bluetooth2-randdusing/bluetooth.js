@@ -4,6 +4,7 @@ if (Meteor.isClient) {
   Session.setDefault('status', 'start');
 
   function addDevice(address, name) {
+
     var isExist = Devices.findOne({address: address});
     if(isExist){
       return;
@@ -41,6 +42,12 @@ if (Meteor.isClient) {
     },
     devices: function() {
       return Devices.find({});
+    }
+  });
+
+  Template.device.events({
+    'click': function(event){
+      Template.instance().$(this).find('.content').toggle();
     }
   });
 
