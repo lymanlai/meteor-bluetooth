@@ -1,6 +1,8 @@
 # 支持的平台
 Android
+
 iOS with RedBearLab BLE hardware, Adafruit Bluefruit LE, Laird BL600, or BlueGiga
+
 Windows Phone 8
 
 
