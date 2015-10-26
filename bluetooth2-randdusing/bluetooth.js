@@ -3,6 +3,25 @@ Devices = new Mongo.Collection(null); // client only
 if (Meteor.isClient) {
   // counter starts at 0
   Session.setDefault('status', 'start');
+
+  function addDevice(address, name) {
+    var isExist = Devices.findOne({address: address});
+    if(isExist){
+      return;
+    }
+
+    if( !name ){
+      return;
+    }
+
+    if( name.substr(0, 2) != 'BP' ){
+      return;
+    }
+
+    Devices.insert({address: address, name: name});
+    return;
+  }
+
   var logger = function(msg) {
     var _msg = '';
     if (_.isObject(msg)) {
@@ -815,36 +834,6 @@ if (Meteor.isClient) {
 
   function writeDescriptorError(obj) {
     logger("Write Descriptor Error : " + JSON.stringify(obj));
-  }
-
-  function addDevice(address, name) {
-    var isExist = Devices.findOne({address: address});
-    if(isExist){
-      return;
-    }
-
-    if( !name ){
-      return;
-    }
-
-    if( name.substr(0, 2) != 'BP' ){
-      return;
-    }
-
-    Devices.insert({address: address, name: name});
-    return;
-
-    //
-    // var $devices = $(".devices");
-    //
-    // var $check = $devices.find("li[data-address='{0}']".format(address));
-    // if ($check.length > 0) {
-    //   return;
-    // }
-    //
-    // var template = $("#device").text().format(address, name);
-    //
-    // $devices.append(template);
   }
 
   function getAddress($item) {
