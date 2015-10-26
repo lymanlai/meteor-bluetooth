@@ -3,17 +3,19 @@
 </head>
 
 <body>
-  <h1>BlueTooth Test!</h1>
+  <h1>BlueTooth Test 1!</h1>
   <p>
     {{status}}
   </p>
+
+  <button class="clear">Clear</button> <br />
+  <button id="list">list</button> <br />
 
   <button id="isConnected">isConnected</button> <br />
   <button id="isEnabled">isEnabled</button> <br />
   <button id="enable">enable</button> <br />
   <button id="discoverUnpaired">discoverUnpaired</button> <br />
   <button id="connect">connect BP5 01B6D0</button> <br />
-  <button id="list">list</button> <br />
   <ul>
     {{#each devices}}
       <li>

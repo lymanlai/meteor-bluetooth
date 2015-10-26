@@ -1,14 +1,40 @@
 // https://github.com/don/BluetoothSerial
+
+Devices = new Mongo.Collection(null); // client only
 if (Meteor.isClient) {
   // counter starts at 0
   Session.setDefault('status', 'start');
-  console.log = function(msg){
-    Session.set('status', msg );
 
+  function addDevice(address, name) {
+    var isExist = Devices.findOne({address: address});
+    if(isExist){
+      return;
+    }
+
+    if( !name ){
+      return;
+    }
+
+    if( name.substr(0, 2) != 'BP' ){
+      return;
+    }
+
+    Devices.insert({address: address, name: name});
     return;
+  }
+
+  var logger = function(msg) {
+    var _msg = '';
+    if (_.isObject(msg)) {
+      _.each(msg, function(value, key, list) {
+        _msg += key + ':' + value + '\n';
+      });
+      msg = _msg;
+    }
+
     var status = Session.get('status');
-    status += "\n" + msg;
-    Session.set('status', status );
+    status = '\n' + msg + '\n' + status + '\n';
+    Session.set('status', status);
   }
 
   Template.body.helpers({
@@ -21,72 +47,77 @@ if (Meteor.isClient) {
   });
 
   Template.body.events({
+    'click button.clear': clear,
     'click button#isConnected': function() {
       bluetoothSerial.isConnected(
         function() {
-          console.log("Bluetooth is connected");
+          logger("Bluetooth is connected");
         },
         function() {
-          console.log("Bluetooth is *not* connected");
+          logger("Bluetooth is *not* connected");
         }
       );
     },
     'click button#isEnabled': function() {
       bluetoothSerial.isEnabled(
         function() {
-          console.log("Bluetooth is enabled");
+          logger("Bluetooth is enabled");
         },
         function() {
-          console.log("Bluetooth is *not* enabled");
+          logger("Bluetooth is *not* enabled");
         }
       );
     },
     'click button#enable': function() {
-      console.log('enable start');
+      logger('enable start');
       bluetoothSerial.enable(
         function() {
-          console.log("Bluetooth is enabled");
+          logger("Bluetooth is enabled");
         },
         function() {
-          console.log("The user did *not* enable Bluetooth");
+          logger("The user did *not* enable Bluetooth");
         }
       );
     },
     'click button#discoverUnpaired': function() {
-      console.log('discoverUnpaired start');
+      logger('discoverUnpaired start');
       bluetoothSerial.discoverUnpaired(function(devices) {
-        console.log(devices.length);
-        console.log('list devices from discoverUnpaired');
-        Session.set('devices', devices);
+        logger('list devices from discoverUnpaired');
+        logger(devices.length);
+        logger(devices);
       }, function(){
-        console.log('discoverUnpaired failed');
+        logger('discoverUnpaired failed');
       });
     },
     'click button#connect': function() {
-      console.log('connect start');
+      logger('connect start');
       var macAddress_or_uuid = '00:4D:32:01:B6:D0';
       bluetoothSerial.connect(macAddress_or_uuid, function() {
-        console.log('connect success');
-        console.log(arguments);
+        logger('connect success');
+        logger(arguments);
       }, function(){
-        console.log('connect failed');
-        console.log(arguments[0]);
-        console.log(arguments[1]);
-        console.log(arguments[2]);
+        logger('connect failed');
+        logger(arguments[0]);
+        logger(arguments[1]);
+        logger(arguments[2]);
       });
     },
 
     'click button#list': function() {
-      console.log('list start');
+      logger('list start');
       bluetoothSerial.list(function(devices) {
-        console.log('list devices from list');
-        Session.set('devices', devices);
+        logger('list devices from list');
+        logger(arguments.length);
+        logger('end list');
       }, function(err) {
-        Session.set('err', err);
-        console.log(err);
+        logger(err);
       });
     }
   });
+
+  function clear() {
+    Session.set('status', '');
+  }
 
 }
 
