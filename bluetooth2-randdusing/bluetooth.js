@@ -1,4 +1,3 @@
-// http://phonegap-plugins.com/plugins/randdusing/bluetoothle
 Devices = new Mongo.Collection(null); // client only
 if (Meteor.isClient) {
   // counter starts at 0

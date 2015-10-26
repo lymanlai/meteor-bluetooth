@@ -1,5 +1,3 @@
-// https://github.com/don/BluetoothSerial
-
 Devices = new Mongo.Collection(null); // client only
 if (Meteor.isClient) {
   // counter starts at 0

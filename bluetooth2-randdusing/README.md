@@ -1,4 +1,4 @@
-use this plugin: https://github.com/don/BluetoothSerial
+use this plugin: http://phonegap-plugins.com/plugins/randdusing/bluetoothle
 
 # 支持的平台
 Android
