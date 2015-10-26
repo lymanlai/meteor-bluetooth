@@ -26,3 +26,4 @@ use this plugin: http://phonegap-plugins.com/plugins/randdusing/bluetoothle
 可以检测到BP3L，但是BP5不行，API都可以用
 
 ## iOS
+可以检测到BP3L，但是BP5不行，API部分不可用：不能开关蓝牙，但是扫描等可以用！
