@@ -1,9 +1,11 @@
-// http://phonegap-plugins.com/plugins/randdusing/bluetoothle
+// http://phonegap-plugins.com/plugins/bcsphere/bluetooth
+
 Devices = new Mongo.Collection(null); // client only
 if (Meteor.isClient) {
-  // counter starts at 0
   Session.setDefault('status', 'start');
   var logger = function(msg) {
+    console.log(msg);
+    return;
     var _msg = '';
     if (_.isObject(msg)) {
       _.each(msg, function(value, key, list) {
@@ -48,9 +50,19 @@ if (Meteor.isClient) {
       request: true
     };
 
+    // logger(BC);
+    logger('test here');
+    return;
     logger("Initialize : " + JSON.stringify(paramsObj));
 
-    bluetoothle.initialize(initializeSuccess, initializeError, paramsObj);
+
+      BC.Bluetooth.OpenBluetooth(function() {
+        alert("bluetooth opened!");
+      }, function() {
+        alert("bluetooth open error!");
+      });
+
+    // bluetooth.initialize(initializeSuccess, initializeError, paramsObj);
 
     return false;
 
@@ -74,7 +86,7 @@ if (Meteor.isClient) {
   function enable() {
     logger("Enable");
 
-    bluetoothle.enable(enableSuccess, enableError);
+    bluetooth.enable(enableSuccess, enableError);
 
     return false;
 
@@ -98,7 +110,7 @@ if (Meteor.isClient) {
   function disable() {
     logger("Disable");
 
-    bluetoothle.disable(disableSuccess, disableError);
+    bluetooth.disable(disableSuccess, disableError);
 
     return false;
 
@@ -129,7 +141,7 @@ if (Meteor.isClient) {
 
     logger("Start Scan : " + JSON.stringify(paramsObj));
 
-    bluetoothle.startScan(startScanSuccess, startScanError, paramsObj);
+    bluetooth.startScan(startScanSuccess, startScanError, paramsObj);
 
     return false;
   }
@@ -155,7 +167,7 @@ if (Meteor.isClient) {
   function stopScan() {
     logger("Stop Scan");
 
-    bluetoothle.stopScan(stopScanSuccess, stopScanError);
+    bluetooth.stopScan(stopScanSuccess, stopScanError);
 
     return false;
   }
@@ -181,7 +193,7 @@ if (Meteor.isClient) {
 
     logger("Retrieve Connected : " + JSON.stringify(paramsObj));
 
-    bluetoothle.retrieveConnected(retrieveConnectedSuccess, retrieveConnectedError, paramsObj);
+    bluetooth.retrieveConnected(retrieveConnectedSuccess, retrieveConnectedError, paramsObj);
 
     return false;
   }
@@ -202,7 +214,7 @@ if (Meteor.isClient) {
   function isInitialized() {
     logger("Is Initialized");
 
-    bluetoothle.isInitialized(isInitializedSuccess);
+    bluetooth.isInitialized(isInitializedSuccess);
 
     return false;
   }
@@ -220,7 +232,7 @@ if (Meteor.isClient) {
   function isEnabled() {
     logger("Is Enabled");
 
-    bluetoothle.isEnabled(isEnabledSuccess);
+    bluetooth.isEnabled(isEnabledSuccess);
 
     return false;
   }
@@ -238,7 +250,7 @@ if (Meteor.isClient) {
   function isScanning() {
     logger("Is Scanning");
 
-    bluetoothle.isScanning(isScanningSuccess);
+    bluetooth.isScanning(isScanningSuccess);
 
     return false;
   }
@@ -260,7 +272,7 @@ if (Meteor.isClient) {
 
     logger("Connect : " + JSON.stringify(paramsObj));
 
-    bluetoothle.connect(connectSuccess, connectError, paramsObj);
+    bluetooth.connect(connectSuccess, connectError, paramsObj);
 
     return false;
   }
@@ -288,7 +300,7 @@ if (Meteor.isClient) {
 
     logger("Reconnect : " + JSON.stringify(paramsObj));
 
-    bluetoothle.reconnect(reconnectSuccess, reconnectError, paramsObj);
+    bluetooth.reconnect(reconnectSuccess, reconnectError, paramsObj);
 
     return false;
   }
@@ -316,7 +328,7 @@ if (Meteor.isClient) {
 
     logger("Disconnect : " + JSON.stringify(paramsObj));
 
-    bluetoothle.disconnect(disconnectSuccess, disconnectError, paramsObj);
+    bluetooth.disconnect(disconnectSuccess, disconnectError, paramsObj);
 
     return false;
   }
@@ -344,7 +356,7 @@ if (Meteor.isClient) {
 
     logger("Close : " + JSON.stringify(paramsObj));
 
-    bluetoothle.close(closeSuccess, closeError, paramsObj);
+    bluetooth.close(closeSuccess, closeError, paramsObj);
 
     return false;
   }
@@ -370,7 +382,7 @@ if (Meteor.isClient) {
 
     logger("Discover : " + JSON.stringify(paramsObj));
 
-    bluetoothle.discover(discoverSuccess, discoverError, paramsObj);
+    bluetooth.discover(discoverSuccess, discoverError, paramsObj);
 
     return false;
   }
@@ -423,7 +435,7 @@ if (Meteor.isClient) {
 
     logger("Services : " + JSON.stringify(paramsObj));
 
-    bluetoothle.services(servicesSuccess, servicesError, paramsObj);
+    bluetooth.services(servicesSuccess, servicesError, paramsObj);
 
     return false;
   }
@@ -455,7 +467,7 @@ if (Meteor.isClient) {
 
     logger("RSSI : " + JSON.stringify(paramsObj));
 
-    bluetoothle.rssi(rssiSuccess, rssiError, paramsObj);
+    bluetooth.rssi(rssiSuccess, rssiError, paramsObj);
 
     return false;
   }
@@ -482,7 +494,7 @@ if (Meteor.isClient) {
 
     logger("MTU : " + JSON.stringify(paramsObj));
 
-    bluetoothle.mtu(mtuSuccess, mtuError, paramsObj);
+    bluetooth.mtu(mtuSuccess, mtuError, paramsObj);
 
     return false;
   }
@@ -508,7 +520,7 @@ if (Meteor.isClient) {
 
     logger("Is Connected : " + JSON.stringify(paramsObj));
 
-    bluetoothle.isConnected(isConnectedSuccess, paramsObj);
+    bluetooth.isConnected(isConnectedSuccess, paramsObj);
 
     return false;
   }
@@ -530,7 +542,7 @@ if (Meteor.isClient) {
 
     logger("Is Discovered : " + JSON.stringify(paramsObj));
 
-    bluetoothle.isDiscovered(isDiscoveredSuccess, paramsObj);
+    bluetooth.isDiscovered(isDiscoveredSuccess, paramsObj);
 
     return false;
   }
@@ -553,7 +565,7 @@ if (Meteor.isClient) {
 
     logger("Request Connection Priority : " + JSON.stringify(paramsObj));
 
-    bluetoothle.requestConnectionPriority(requestConnectionPrioritySuccess, requestConnectionPriorityError, paramsObj);
+    bluetooth.requestConnectionPriority(requestConnectionPrioritySuccess, requestConnectionPriorityError, paramsObj);
 
     return false;
   }
@@ -581,7 +593,7 @@ if (Meteor.isClient) {
 
     logger("Characteristics : " + JSON.stringify(paramsObj));
 
-    bluetoothle.characteristics(characteristicsSuccess, characteristicsError, paramsObj);
+    bluetooth.characteristics(characteristicsSuccess, characteristicsError, paramsObj);
 
     return false;
   }
@@ -615,7 +627,7 @@ if (Meteor.isClient) {
 
     logger("Descriptors : " + JSON.stringify(paramsObj));
 
-    bluetoothle.descriptors(descriptorsSuccess, descriptorsError, paramsObj);
+    bluetooth.descriptors(descriptorsSuccess, descriptorsError, paramsObj);
 
     return false;
   }
@@ -649,7 +661,7 @@ if (Meteor.isClient) {
 
     logger("Read : " + JSON.stringify(paramsObj));
 
-    bluetoothle.read(readSuccess, readError, paramsObj);
+    bluetooth.read(readSuccess, readError, paramsObj);
 
     return false;
   }
@@ -658,7 +670,7 @@ if (Meteor.isClient) {
     logger("Read Success : " + JSON.stringify(obj));
 
     if (obj.status == "read") {
-      /*var bytes = bluetoothle.encodedStringToBytes(obj.value);
+      /*var bytes = bluetooth.encodedStringToBytes(obj.value);
       logger("Read : " + bytes[0]);*/
 
       logger("Read");
@@ -680,7 +692,7 @@ if (Meteor.isClient) {
 
     logger("Subscribe : " + JSON.stringify(paramsObj));
 
-    bluetoothle.subscribe(subscribeSuccess, subscribeError, paramsObj);
+    bluetooth.subscribe(subscribeSuccess, subscribeError, paramsObj);
 
     return false;
   }
@@ -710,7 +722,7 @@ if (Meteor.isClient) {
 
     logger("Unsubscribe : " + JSON.stringify(paramsObj));
 
-    bluetoothle.unsubscribe(unsubscribeSuccess, unsubscribeError, paramsObj);
+    bluetooth.unsubscribe(unsubscribeSuccess, unsubscribeError, paramsObj);
 
     return false;
   }
@@ -739,7 +751,7 @@ if (Meteor.isClient) {
 
     logger("Write : " + JSON.stringify(paramsObj));
 
-    bluetoothle.write(writeSuccess, writeError, paramsObj);
+    bluetooth.write(writeSuccess, writeError, paramsObj);
 
     return false;
   }
@@ -768,7 +780,7 @@ if (Meteor.isClient) {
 
     logger("Read Descriptor : " + JSON.stringify(paramsObj));
 
-    bluetoothle.readDescriptor(readDescriptorSuccess, readDescriptorError, paramsObj);
+    bluetooth.readDescriptor(readDescriptorSuccess, readDescriptorError, paramsObj);
 
     return false;
   }
@@ -798,7 +810,7 @@ if (Meteor.isClient) {
 
     logger("Write Descriptor : " + JSON.stringify(paramsObj));
 
-    bluetoothle.writeDescriptor(writeDescriptorSuccess, writeDescriptorError, paramsObj);
+    bluetooth.writeDescriptor(writeDescriptorSuccess, writeDescriptorError, paramsObj);
 
     return false;
   }
@@ -818,20 +830,17 @@ if (Meteor.isClient) {
   }
 
   function addDevice(address, name) {
-    var isExist = Devices.findOne({address: address});
-    if(isExist){
+    var isExist = Devices.findOne({
+      address: address
+    });
+    if (isExist) {
       return;
     }
 
-    if( !name ){
-      return;
-    }
-
-    if( name.substr(0, 2) != 'BP' ){
-      return;
-    }
-
-    Devices.insert({address: address, name: name});
+    Devices.insert({
+      address: address,
+      name: name
+    });
     return;
 
     //
@@ -1065,7 +1074,7 @@ if (Meteor.isClient) {
 
       var bytes = new Uint8Array(1);
       bytes[0] = 0;
-      var value = bluetoothle.bytesToEncodedString(bytes);
+      var value = bluetooth.bytesToEncodedString(bytes);
 
       write(address, serviceUuid, characteristicUuid, value);
 
@@ -1101,7 +1110,7 @@ if (Meteor.isClient) {
 
       var bytes = new Uint8Array(1);
       bytes[0] = 0;
-      var value = bluetoothle.bytesToEncodedString(bytes);
+      var value = bluetooth.bytesToEncodedString(bytes);
 
       writeDescriptor(address, serviceUuid, characteristicUuid, descriptorUuid, value);
 
